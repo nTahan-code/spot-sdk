@@ -4,10 +4,11 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Estop &mdash; Spot 2.3.2 documentation</title>
+  <title>Estop &mdash; Spot 2.3.5 documentation</title>
   
 
   
@@ -68,7 +69,7 @@
             
             
               <div class="version">
-                2.3.2
+                2.3.5
               </div>
             
           
@@ -285,6 +286,7 @@
 <li class="toctree-l4"><a class="reference internal" href="robot.html">Robot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="robot_state.html">Robot State</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sdk.html">SDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="server_util.html">Server Util</a></li>
 <li class="toctree-l4"><a class="reference internal" href="spot_cam/README.html">Spot CAM</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="spot_cam/audio.html">Audio</a></li>
 <li class="toctree-l5"><a class="reference internal" href="spot_cam/compositor.html">Compositor</a></li>
@@ -344,6 +346,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../../bosdyn-choreography-client/src/bosdyn/choreography/client/choreography.html">Choreography</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../docs/python/fetch_tutorial/fetch1.html">Fetch Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../docs/python/fetch_tutorial/fetch2.html">Part 2: Training the Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../docs/python/fetch_tutorial/fetch3.html">Part 3: Evaluating the Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../docs/python/fetch_tutorial/fetch4.html">Part 4: Autonomous Pick Up</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../docs/python/fetch_tutorial/fetch5.html">Part 5: Detecting People and Playing Fetch</a></li>
 </ul>
 </li>
 </ul>
@@ -544,7 +553,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-bosdyn.client.estop">
+  <section id="module-bosdyn.client.estop">
 <span id="estop"></span><h1>Estop<a class="headerlink" href="#module-bosdyn.client.estop" title="Permalink to this headline">¶</a></h1>
 <p>For clients to the emergency stop (estop) service.</p>
 <dl class="py exception">
@@ -596,6 +605,13 @@
 <p>Tried to replace a EstopConfig, but provided bad ID.</p>
 </dd></dl>
 
+<dl class="py exception">
+<dt id="bosdyn.client.estop.MotorsOnError">
+<em class="property">exception </em><code class="sig-prename descclassname">bosdyn.client.estop.</code><code class="sig-name descname">MotorsOnError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span></em>, <em class="sig-param"><span class="n">error_message</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/bosdyn/client/estop.html#MotorsOnError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bosdyn.client.estop.MotorsOnError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#bosdyn.client.estop.EstopResponseError" title="bosdyn.client.estop.EstopResponseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">bosdyn.client.estop.EstopResponseError</span></code></a></p>
+<p>The operation is not allowed while motors are on.</p>
+</dd></dl>
+
 <dl class="py class">
 <dt id="bosdyn.client.estop.StopLevel">
 <em class="property">class </em><code class="sig-prename descclassname">bosdyn.client.estop.</code><code class="sig-name descname">StopLevel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bosdyn.client.estop.StopLevel" title="Permalink to this definition">¶</a></dt>
@@ -625,7 +641,7 @@
 
 <dl class="py class">
 <dt id="bosdyn.client.estop.EstopClient">
-<em class="property">class </em><code class="sig-prename descclassname">bosdyn.client.estop.</code><code class="sig-name descname">EstopClient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'EstopClient - PID: 3479'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/bosdyn/client/estop.html#EstopClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bosdyn.client.estop.EstopClient" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">bosdyn.client.estop.</code><code class="sig-name descname">EstopClient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'EstopClient - PID: 8836'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/bosdyn/client/estop.html#EstopClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bosdyn.client.estop.EstopClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="common.html#bosdyn.client.common.BaseClient" title="bosdyn.client.common.BaseClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">bosdyn.client.common.BaseClient</span></code></a></p>
 <p>Client to the estop service.</p>
 <dl class="py attribute">
@@ -918,7 +934,7 @@ challenge has been sent by the server.</p></li>
 
 <dl class="py class">
 <dt id="bosdyn.client.estop.EstopKeepAlive">
-<em class="property">class </em><code class="sig-prename descclassname">bosdyn.client.estop.</code><code class="sig-name descname">EstopKeepAlive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">endpoint</span></em>, <em class="sig-param"><span class="n">rpc_timeout_seconds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rpc_interval_seconds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keep_running_cb</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/bosdyn/client/estop.html#EstopKeepAlive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bosdyn.client.estop.EstopKeepAlive" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">bosdyn.client.estop.</code><code class="sig-name descname">EstopKeepAlive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">endpoint</span></em>, <em class="sig-param"><span class="n">rpc_timeout_seconds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rpc_interval_seconds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keep_running_cb</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_status_queue_size</span><span class="o">=</span><span class="default_value">20</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/bosdyn/client/estop.html#EstopKeepAlive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bosdyn.client.estop.EstopKeepAlive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Wraps an EstopEndpoint to do periodic check-ins, keeping software estop from timing out.</p>
 <p>This is intended to be the common implementation of both periodic checking-in and one-time
@@ -1001,7 +1017,7 @@ check-ins. See the command line utility and the “Big Red Button” application
 <code class="sig-prename descclassname">bosdyn.client.estop.</code><code class="sig-name descname">response_from_challenge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">challenge</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/bosdyn/client/estop.html#response_from_challenge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bosdyn.client.estop.response_from_challenge" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</div>
+</section>
 
 
            </div>

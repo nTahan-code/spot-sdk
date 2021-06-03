@@ -54,6 +54,10 @@ class InvalidIdError(EstopResponseError):
     """Tried to replace a EstopConfig, but provided bad ID."""
 
 
+class MotorsOnError(EstopResponseError):
+    """The operation is not allowed while motors are on."""
+
+
 StopLevel = enum.IntEnum('StopLevel', estop_pb2.EstopStopLevel.items())
 
 
@@ -438,7 +442,7 @@ class EstopKeepAlive(object):
     """
 
     def __init__(self, endpoint, rpc_timeout_seconds=None, rpc_interval_seconds=None,
-                 keep_running_cb=None):
+                 keep_running_cb=None, max_status_queue_size=20):
         """Kicks off periodic check-in on a thread."""
 
         self._endpoint = endpoint
@@ -457,7 +461,7 @@ class EstopKeepAlive(object):
 
         self.logger.debug('New %s for endpoint "%s"', self.__class__, self._endpoint)
 
-        self.status_queue = queue.Queue()
+        self.status_queue = queue.Queue(maxsize=max_status_queue_size)
         self._update_status(self.KeepAliveStatus.OK)
 
         # Do an initial check-in, and just log any errors that occur.
@@ -539,7 +543,15 @@ class EstopKeepAlive(object):
         self.logger.debug('Check-in successful')
 
     def _update_status(self, status, msg=''):
-        """Update the estop_keep_alive status by populating the queue. Raise exception if full."""
+        """Update the estop_keep_alive status by populating the queue, clearing old entries if the queue is full.
+
+        Note: this method is not thread safe because if called by multiple different threads it could
+        create a race condition which will raise a FullQueue exception. The EstopKeepAlive only uses
+        this in a single background thread for the _periodic_check_in method.
+        """
+        if self.status_queue.full():
+            # Remove an element to clear out the status queue for the new element.
+            self.status_queue.get_nowait()
         self.status_queue.put((status, msg), block=False)
 
     def _check_in(self, rpc_timeout=None):
@@ -648,6 +660,7 @@ _SET_CONFIG_STATUS_TO_ERROR = collections.defaultdict(lambda: (ResponseError, No
 _SET_CONFIG_STATUS_TO_ERROR.update({
     estop_pb2.SetEstopConfigResponse.STATUS_SUCCESS: (None, None),
     estop_pb2.SetEstopConfigResponse.STATUS_INVALID_ID: (InvalidIdError, InvalidIdError.__doc__),
+    estop_pb2.SetEstopConfigResponse.STATUS_MOTORS_ON: (MotorsOnError, MotorsOnError.__doc__),
 })
 
 

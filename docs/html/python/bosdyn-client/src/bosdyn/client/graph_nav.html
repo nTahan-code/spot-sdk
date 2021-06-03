@@ -4,10 +4,11 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Graph Nav &mdash; Spot 2.3.2 documentation</title>
+  <title>Graph Nav &mdash; Spot 2.3.5 documentation</title>
   
 
   
@@ -68,7 +69,7 @@
             
             
               <div class="version">
-                2.3.2
+                2.3.5
               </div>
             
           
@@ -285,6 +286,7 @@
 <li class="toctree-l4"><a class="reference internal" href="robot.html">Robot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="robot_state.html">Robot State</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sdk.html">SDK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="server_util.html">Server Util</a></li>
 <li class="toctree-l4"><a class="reference internal" href="spot_cam/README.html">Spot CAM</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="spot_cam/audio.html">Audio</a></li>
 <li class="toctree-l5"><a class="reference internal" href="spot_cam/compositor.html">Compositor</a></li>
@@ -344,6 +346,13 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../../bosdyn-choreography-client/src/bosdyn/choreography/client/choreography.html">Choreography</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../docs/python/fetch_tutorial/fetch1.html">Fetch Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../docs/python/fetch_tutorial/fetch2.html">Part 2: Training the Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../docs/python/fetch_tutorial/fetch3.html">Part 3: Evaluating the Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../docs/python/fetch_tutorial/fetch4.html">Part 4: Autonomous Pick Up</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../../docs/python/fetch_tutorial/fetch5.html">Part 5: Detecting People and Playing Fetch</a></li>
 </ul>
 </li>
 </ul>
@@ -544,7 +553,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-bosdyn.client.graph_nav">
+  <section id="module-bosdyn.client.graph_nav">
 <span id="graph-nav"></span><h1>Graph Nav<a class="headerlink" href="#module-bosdyn.client.graph_nav" title="Permalink to this headline">¶</a></h1>
 <p>For clients to the graphnav service.</p>
 <dl class="py class">
@@ -673,7 +682,7 @@
 
 <dl class="py method">
 <dt id="bosdyn.client.graph_nav.GraphNavClient.navigate_to">
-<code class="sig-name descname">navigate_to</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">destination_waypoint_id</span></em>, <em class="sig-param"><span class="n">cmd_duration</span></em>, <em class="sig-param"><span class="n">route_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">travel_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">leases</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">timesync_endpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">command_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/bosdyn/client/graph_nav.html#GraphNavClient.navigate_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bosdyn.client.graph_nav.GraphNavClient.navigate_to" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">navigate_to</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">destination_waypoint_id</span></em>, <em class="sig-param"><span class="n">cmd_duration</span></em>, <em class="sig-param"><span class="n">route_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">travel_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">leases</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">timesync_endpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">command_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">destination_waypoint_tform_body_goal</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/bosdyn/client/graph_nav.html#GraphNavClient.navigate_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bosdyn.client.graph_nav.GraphNavClient.navigate_to" title="Permalink to this definition">¶</a></dt>
 <dd><p>Navigate to a specific waypoint along a route chosen by the GraphNav service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -686,6 +695,7 @@
 <li><p><strong>timesync_endpoint</strong> – Use this endpoint for timesync fields. Will use the client’s endpoint by default.</p></li>
 <li><p><strong>command_id</strong> – If not None, this continues an existing navigate_to command with the given ID. If None,</p></li>
 <li><p><strong>new command_id will be used.</strong> (<em>a</em>) – </p></li>
+<li><p><strong>destination_waypoint_tform_body_goal</strong> – SE2Pose protobuf of an offset relative to the destination waypoint.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -714,7 +724,7 @@
 
 <dl class="py method">
 <dt id="bosdyn.client.graph_nav.GraphNavClient.navigate_to_async">
-<code class="sig-name descname">navigate_to_async</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">destination_waypoint_id</span></em>, <em class="sig-param"><span class="n">cmd_duration</span></em>, <em class="sig-param"><span class="n">route_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">travel_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">leases</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">timesync_endpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">command_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/bosdyn/client/graph_nav.html#GraphNavClient.navigate_to_async"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bosdyn.client.graph_nav.GraphNavClient.navigate_to_async" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">navigate_to_async</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">destination_waypoint_id</span></em>, <em class="sig-param"><span class="n">cmd_duration</span></em>, <em class="sig-param"><span class="n">route_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">travel_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">leases</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">timesync_endpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">command_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">destination_waypoint_tform_body_goal</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/bosdyn/client/graph_nav.html#GraphNavClient.navigate_to_async"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bosdyn.client.graph_nav.GraphNavClient.navigate_to_async" title="Permalink to this definition">¶</a></dt>
 <dd><p>Async version of navigate_to().</p>
 </dd></dl>
 
@@ -1136,7 +1146,7 @@ The ids should be ordered from [start waypoint –&gt; destination waypoint].</p
 <p>Happens when you try to continue a command that was either expired, or had an unrecognized id.</p>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>

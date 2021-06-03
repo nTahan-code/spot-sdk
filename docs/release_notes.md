@@ -12,6 +12,97 @@ Development Kit License (20191101-BDSDK-SL).
 
 # Spot Release Notes
 
+## 2.3.5
+
+### New Features
+
+#### Spot CAM
+
+Added `InitializeLens` rpc, which resets the PTZ autofocus without needing to power cycle the Spot CAM.
+
+#### Data Buffer
+
+A new `sync` option has been added to `RecordDataBlobsRequest` which specifies that the RPC should not return a response until the data has been fully committed and can be read back.
+This is exposed through the optional `write_sync` argument to the `add_blob()` and `add_protobuf()` methods of the `DataBufferClient`.
+
+### Bug fixes and improvements
+
+When running with a Spot CAM+ (PTZ) running 2.3.5, the `SetPowerStatus` and `CyclePower` endpoints will now return an error if the PTZ is specified. These endpoints could previously cause the WebRTC feed to crash. These RPCs are still safe to use for other devices, but due to hardware limitations, resetting the PTZ power can possibly cause the Spot CAM to require a reboot to regain the WebRTC stream.
+
+`RetryableUnavailableError` was raised in more cases than it should have been, and it is now more selectively raised.
+
+The `EstopKeepAlive` expected users to monitor its status by popping entries out of its `status_queue`.  If the user did not do so, the queue would continue to grow without bound.
+The queue size is now bounded and old unchecked entries will be thrown away.  The queue size is specified with the `max_status_queue_size` argument to the constructor.
+
+### Breaking Changes
+
+As stated above, the behavior of `SetPowerStatus` and `CyclePower` endpoints have been changed for Spot CAM+ units when attempting to change the power status of the PTZ. They now return an error instead of modifying the power status of the PTZ. They remain functional for the Spot CAM+IR. Clients using these SDK endpoints to reset the autofocus on the PTZ are recommended to use `InitializeLens` instead. Other clients are encouraged to seek alternative options.
+
+### Deprecations
+
+The `ResponseContext` helper class has been moved to the bosdyn-client package (from the bosdyn-mission package), so that it can be used for gRPC logging in data acquisition plugin services in addition to the mission service. The new import location will be from `bosdyn.client.server_util`, and the original import location of `bosdyn.mission.server_util` has been deprecated.
+
+### Known Issues
+
+Same as 2.3.0
+
+## 2.3.4
+
+### New Features
+
+#### Power Control
+New options have been added to the Power Service to allow for power cycling the robot and powering the payload ports or wifi radios on or off. Additional fields have been added to the robot state message to check the payload and wifi power states. Support has also been been added to the `bosdyn.client` command line interface for these commands.
+
+These new options will only work on some Enterprise Spot robots. Check the HardwareConfiguration message reported by a particular robot to see if it supports them.
+
+### Bug fixes and improvements
+
+Fixed an issue that could cause payload registration or directory registraion keep-alive threads to exit early in certain cases.
+
+Fixed a couple issues with the webcam example: updated the Dockerfile to create a smaller container specifically with python 3.7, added new optional argument to specify the video codec, and programmatically prevent substring arguments other than the `--device-name` argument to avoid accidental confusion with the docker container's `--device` argument.
+
+### Known Issues
+
+Same as 2.3.0
+
+### Sample Code
+
+A new [tutorial](python/fetch_tutorial/fetch1.md) has been added to walk through using machine learning, the Network Compute Bridge, and Manipulation API to play fetch with Spot.
+
+## 2.3.3
+
+### New Features
+
+#### Graph Nav
+The python Graph Nav client now allows setting an offset to the destination, for navigating to a position relative to the final waypoint instead of exactly matching the final waypoint position and orientation.
+
+### Bug fixes and improvements
+
+Fixed issues where the data acquisition download helpers did not handle absolute paths on windows and did not clean filenames correctly. (Thanks David from Levatas!)
+
+Zip file names from the data download service no longer contain difficult characters.
+
+Fixed an issue where Graph Nav would sometimes report the robot was impaired on the first usage after restarting the robot.
+
+Errors returned from Network Compute Bridge workers will be better propagated in the Network Compute Bridge response.
+
+Updated background threads for the payload and directory registration helpers to silently ignore transient errors.
+
+Fixed an issue where requesting thermal images with PTZ/Pano images in a single data acquisition action caused thermal images to either not be collected or saved as “blank” images.
+
+### Breaking Changes
+
+The estop service will now refuse to change configuration if the robot is already powered on, returning a status of STATUS_MOTORS_ON. This prevents accidentally cutting power while the robot is in operation.
+
+### Known Issues
+
+Same as 2.3.0
+
+### Sample Code
+
+[**Network Compute Bridge**](../python/examples/network_compute_bridge/README.md)
+Updated to provide appropriate error messages from the workers.
+
 ## 2.3.2
 
 ### New Features

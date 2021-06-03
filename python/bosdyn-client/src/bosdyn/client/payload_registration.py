@@ -20,7 +20,7 @@ import bosdyn.api.payload_registration_service_pb2_grpc as payload_registration_
 
 from bosdyn.client.common import (BaseClient, error_factory, handle_unset_status_error,
                                   handle_common_header_errors, handle_lease_use_result_errors)
-from bosdyn.client import ResponseError, TimedOutError
+from bosdyn.client import ResponseError, TimedOutError, RetryableUnavailableError
 
 LOGGER = logging.getLogger('payload_registration_client')
 
@@ -325,6 +325,9 @@ class PayloadRegistrationKeepAlive(object):
                 self.pay_reg_client.register_payload(self.payload, self.secret)
             except PayloadAlreadyExistsError:
                 # Ignore "already exists" errors -- we expect those.
+                pass
+            except RetryableUnavailableError:
+                # Ignore transient availability errors and retry.
                 pass
             except TimedOutError:
                 self.logger.warning('Timed out, timeout set to "{}"'.format(self._rpc_timeout_secs))
